@@ -49,7 +49,7 @@ On first launch, the app seeds sample data so you can explore right away.
 PORT=8080 npm start
 ```
 
-### Docker
+### Docker (standalone)
 
 ```bash
 # Build the image
@@ -59,22 +59,45 @@ docker build -t tasktracker .
 docker run -d -p 3000:3000 -v tasktracker-data:/app/data --name tasktracker tasktracker
 ```
 
-The app will be at **http://localhost:3000**. The `-v tasktracker-data:/app/data` flag ensures your SQLite database survives container restarts.
+### Docker Compose + Nginx (recommended for deploy)
+
+```bash
+docker compose up -d
+```
+
+This starts two containers:
+- **Nginx** on port **80** — reverse proxy with gzip and static file caching
+- **Node app** on internal port 3000
+
+Visit **http://localhost** (port 80). SQLite data persists via a named Docker volume.
+
+```bash
+# Stop
+docker compose down
+
+# Rebuild after code changes
+docker compose up -d --build
+```
 
 ## Project Structure
 
 ```
 NotesApp/
-├── index.html          # Main HTML shell
-├── styles.css          # All styles (dark/light themes)
-├── app.js              # Frontend logic (rendering, events, state)
-├── package.json        # Dependencies & scripts
+├── index.html            # Main HTML shell
+├── styles.css            # All styles (dark/light themes)
+├── app.js                # Frontend logic (rendering, events, state)
+├── package.json          # Dependencies & scripts
+├── Dockerfile            # Container image for the Node app
+├── docker-compose.yml    # Orchestrates Node app + Nginx
 ├── .gitignore
+├── .dockerignore
 ├── server/
-│   ├── index.js        # Express server (static files + API)
-│   └── db.js           # SQLite read/write layer
-└── data/               # Created at runtime (gitignored)
-    └── tasktracker.db  # SQLite database
+│   ├── index.js          # Express server (static files + API)
+│   └── db.js             # SQLite read/write layer
+├── nginx/
+│   └── nginx.conf        # Reverse proxy config
+└── data/                 # Created at runtime (gitignored)
+    └── tasktracker.db    # SQLite database
 ```
 
 ## API
