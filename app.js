@@ -1753,12 +1753,20 @@ function wireGlobal() {
     if (e.target.matches("[data-close]")) closeModal();
   });
 
-  // Nav
+  // Mobile menu toggle
+  const menuToggle = document.getElementById("menuToggle");
+  const sidebar = document.querySelector(".sidebar");
+  menuToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+  });
+
+  // Nav — close mobile sidebar on navigate
   document.querySelectorAll(".nav-item").forEach((n) => {
     n.addEventListener("click", () => {
       filter.project = null;
       filter.tag = null;
       filter.query = "";
+      sidebar.classList.remove("open");
     });
   });
 
