@@ -1,0 +1,14 @@
+{
+  "name": "tasktracker",
+  "version": "1.0.0",
+  "description": "TaskTracker — personal task and notes manager",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "express": "^4.21.0"
+  }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskTracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-name">TaskTracker</span>
+      </div>
+      <div class="quick-add">
+        <input
+          id="quickAdd"
+          type="text"
+          placeholder="+ Add task… (press n to focus, Enter to save)"
+          autocomplete="off"
+        />
+      </div>
+      <div class="topbar-actions">
+        <button id="themeToggle" class="icon-btn" title="Toggle theme">☾</button>
+        <button class="icon-btn" data-tooltip="n — new task
+/ — search
+1 — Board
+2 — Today
+3 — History
+4 — CPT
+5 — Notes
+e — edit selected
+Esc — close">?</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <nav>
+          <a href="#board" class="nav-item" data-view="board">
+            <span class="nav-icon">▦</span> Board
+          </a>
+          <a href="#today" class="nav-item" data-view="today">
+            <span class="nav-icon">◉</span> Today
+          </a>
+          <a href="#history" class="nav-item" data-view="history">
+            <span class="nav-icon">⟲</span> History
+          </a>
+          <a href="#cpt" class="nav-item" data-view="cpt">
+            <span class="nav-icon">★</span> CPT Report
+          </a>
+          <a href="#notes" class="nav-item" data-view="notes">
+            <span class="nav-icon">✎</span> Notes
+          </a>
+          <a href="#projects" class="nav-item" data-view="projects">
+            <span class="nav-icon">▤</span> Projects
+          </a>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="stat"><span id="statTotal">0</span> tasks</div>
+          <div class="stat"><span id="statDone">0</span> done</div>
+        </div>
+      </aside>
+
+      <main id="view" class="view"></main>
+    </div>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-body">
+      <div class="modal-header">
+        <h3 id="modalTitle">Edit Task</h3>
+        <button class="icon-btn" data-close>✕</button>
+      </div>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
